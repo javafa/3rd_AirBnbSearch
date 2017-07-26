@@ -24,14 +24,22 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         btnCheckin = (Button) findViewById(R.id.btnCheckin);
-        String btnCheckinText = getString(R.string.hint_start_date)
-                +"<br> <font color=\"#fd5a5f\">"+ getString(R.string.hint_select_date)+"</font>";
+        String inText = "<font color='#888888'>"+getString(R.string.hint_start_date)
+                +"</font> <br> <font color=\"#fd5a5f\">"+ getString(R.string.hint_select_date)+"</font>";
         if(Build.VERSION.SDK_INT < Build.VERSION_CODES.N){
-            btnCheckin.setText(Html.fromHtml(btnCheckinText), TextView.BufferType.SPANNABLE);
+            btnCheckin.setText(Html.fromHtml(inText), TextView.BufferType.SPANNABLE);
         }else {
-            btnCheckin.setText(Html.fromHtml(btnCheckinText, Html.FROM_HTML_MODE_COMPACT), TextView.BufferType.SPANNABLE);
+            btnCheckin.setText(Html.fromHtml(inText, Html.FROM_HTML_MODE_COMPACT), TextView.BufferType.SPANNABLE);
         }
+
         btnCheckout = (Button) findViewById(R.id.btnCheckout);
+        String outText = "<font color='#888888'>"+getString(R.string.hint_start_date)
+                +"</font> <br> <font color=\"#fd5a5f\"> - </font>";
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.N){
+            btnCheckout.setText(Html.fromHtml(outText), TextView.BufferType.SPANNABLE);
+        }else {
+            btnCheckout.setText(Html.fromHtml(outText, Html.FROM_HTML_MODE_COMPACT), TextView.BufferType.SPANNABLE);
+        }
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

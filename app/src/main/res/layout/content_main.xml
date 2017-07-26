@@ -37,7 +37,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/hint_start_date" />
+                    android:text="button"
+                    android:textAllCaps="false"/>
 
                 <Button
                     android:id="@+id/btnCheckout"
@@ -45,7 +46,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/hint_end_date" />
+                    android:text="button"
+                    android:textAllCaps="false"/>
             </LinearLayout>
             <CalendarView
                 android:id="@+id/calendarView"
