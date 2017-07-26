@@ -24,12 +24,15 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         btnCheckin = (Button) findViewById(R.id.btnCheckin);
+        // 버튼에 다양한 색깔의 폰트 적용하기
+        // 위젯의 android:textAllCaps="false" 적용 필요
         String inText = "<font color='#888888'>"+getString(R.string.hint_start_date)
                 +"</font> <br> <font color=\"#fd5a5f\">"+ getString(R.string.hint_select_date)+"</font>";
         if(Build.VERSION.SDK_INT < Build.VERSION_CODES.N){
             btnCheckin.setText(Html.fromHtml(inText), TextView.BufferType.SPANNABLE);
         }else {
-            btnCheckin.setText(Html.fromHtml(inText, Html.FROM_HTML_MODE_COMPACT), TextView.BufferType.SPANNABLE);
+            // 누가 이상 버전은 fromHtml 의 두 번째 인자로 Html.FROM_HTML_MODE_LEGACY 필요
+            btnCheckin.setText(Html.fromHtml(inText, Html.FROM_HTML_MODE_LEGACY), TextView.BufferType.SPANNABLE);
         }
 
         btnCheckout = (Button) findViewById(R.id.btnCheckout);
