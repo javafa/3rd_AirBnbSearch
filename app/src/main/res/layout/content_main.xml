@@ -37,8 +37,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="button"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                    android:text="button" />
 
                 <Button
                     android:id="@+id/btnCheckout"
@@ -46,8 +45,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="button"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                    android:text="button" />
             </LinearLayout>
             <CalendarView
                 android:id="@+id/calendarView"
