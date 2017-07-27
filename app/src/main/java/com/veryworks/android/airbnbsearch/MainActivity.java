@@ -1,50 +1,51 @@
 package com.veryworks.android.airbnbsearch;
 
-import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.CalendarView;
 
 public class MainActivity extends AppCompatActivity {
 
-    FloatingActionButton fab;
-    Button btnCheckin, btnCheckout;
+    private FloatingActionButton fab;
+    private Button btnCheckin, btnCheckout;
+    private CalendarView calendarView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initView();
+        setListener();
+        setCalendarButtonText();
+    }
+
+    private void initView() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        calendarView = (CalendarView) findViewById(R.id.calendarView);
         btnCheckin = (Button) findViewById(R.id.btnCheckin);
-        // 버튼에 다양한 색깔의 폰트 적용하기
-        // 위젯의 android:textAllCaps="false" 적용 필요
-        String inText = "<font color='#888888'>"+getString(R.string.hint_start_date)
-                +"</font> <br> <font color=\"#fd5a5f\">"+ getString(R.string.hint_select_date)+"</font>";
-        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.N){
-            btnCheckin.setText(Html.fromHtml(inText), TextView.BufferType.SPANNABLE);
-        }else {
-            // 누가 이상 버전은 fromHtml 의 두 번째 인자로 Html.FROM_HTML_MODE_LEGACY 필요
-            btnCheckin.setText(Html.fromHtml(inText, Html.FROM_HTML_MODE_LEGACY), TextView.BufferType.SPANNABLE);
-        }
-
         btnCheckout = (Button) findViewById(R.id.btnCheckout);
-        String outText = "<font color='#888888'>"+getString(R.string.hint_start_date)
-                +"</font> <br> <font color=\"#fd5a5f\"> - </font>";
-        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.N){
-            btnCheckout.setText(Html.fromHtml(outText), TextView.BufferType.SPANNABLE);
-        }else {
-            btnCheckout.setText(Html.fromHtml(outText, Html.FROM_HTML_MODE_COMPACT), TextView.BufferType.SPANNABLE);
-        }
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
+
+    }
+
+    private void setListener(){
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                Log.i("Calendar","year:"+year+", month:"+month+", dayOfMonth:"+dayOfMonth);
+            }
+        });
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,5 +53,18 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    private void setCalendarButtonText(){
+        // 버튼에 다양한 색깔의 폰트 적용하기
+        // 위젯의 android:textAllCaps="false" 적용 필요
+        String inText = "<font color='#888888'>" + getString(R.string.hint_start_date)
+                + "</font> <br> <font color=\"#fd5a5f\">" + getString(R.string.hint_select_date) + "</font>";
+        StringUtil.setHtmlText(btnCheckin, inText);
+
+
+        String outText = "<font color='#888888'>" + getString(R.string.hint_start_date)
+                + "</font> <br> <font color=\"#fd5a5f\"> - </font>";
+        StringUtil.setHtmlText(btnCheckout, outText);
     }
 }
