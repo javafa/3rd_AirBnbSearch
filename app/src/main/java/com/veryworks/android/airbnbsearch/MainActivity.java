@@ -79,9 +79,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 setButtonText(btnCheckout, getString(R.string.hint_end_date), getString(R.string.hint_select_date));
                 setButtonText(btnCheckin, getString(R.string.hint_start_date), search.checkinDate);
                 break;
-            case R.id.fab:
+            case R.id.fab: // 검색 전송
+                search();
                 break;
         }
+    }
+
+    private void search(){
+        // 1. 레트로핏 생성
+        Retrofit client = new Retrofit.Builder()
+                .baseUrl(ISearch.SERVER)
+                //.addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build();
+        // 2. 서비스 연결
+        ISearch myServer = client.create(ISearch.class);
+
+        // 3. 서비스의 특정 함수 호출 -> Observable 생성
+        Observable<ResponseBody> observable = myServer.get(
+                // 값처리
+        );
+
+        // 4. subscribe 등록
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        responseBody -> {
+                            // 1. 데이터를 꺼내고
+                            String jsonString = responseBody.string();
+                            Gson gson = new Gson();
+                            // 2. 데이터를 아답터에 세팅하고
+
+                            // 3. 아답터 갱신
+                            // 호출된 곳에 따라 처리가 달라진다.
+                        }
+                );
     }
 
     CalendarView.OnDateChangeListener dateChangeListener = new CalendarView.OnDateChangeListener() {
