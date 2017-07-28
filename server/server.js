@@ -33,16 +33,16 @@ function executeQuery(response, search){
               + "     or b.checkout between '"+search.checkin+"' and '"+search.checkout+"' "
               + "     or (b.checkin <= '"+search.checkin+"' and b.checkout >= '"+search.checkout+"') "
               + " ) ";
-        if(search.guests){
+        if(search.guests > -1){
             query = query + " and guests > " + search.guests;
         }
-        if(search.type){
+        if(search.type > -1){
             query = query + " and type = " + search.type;
         }
-        if(search.price_min && search.price_max){
+        if(search.price_min > -1 && search.price_max > -1){
             query = query + " and price between " + search.price_min + " and " + search.price_max;
         }
-        if(search.amenities){ // wifi 여부만 체크
+        if(search.amenities > -1){ // wifi 여부만 체크
             query = query + " and amenities = " + search.amenities;
         }
         console.log("Query:"+query);
