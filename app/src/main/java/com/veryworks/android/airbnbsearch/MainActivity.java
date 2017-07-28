@@ -100,12 +100,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 search();
                 break;
             case R.id.btnGuestMinus:
-                search.setGuestsMinus();
-                guest.setText(search.guests + "");
+                search.setGuests(search.getGuests()-1);
+                guest.setText(search.getGuests() + "");
                 break;
             case R.id.btnGuestPlus:
-                search.setGuestsPlus();
-                guest.setText(search.guests + "");
+                search.setGuests(search.getGuests()+1);
+                guest.setText(search.getGuests() + "");
                 break;
         }
     }
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Observable<ResponseBody> observable = server.get(
                 search.checkinDate,
                 search.checkoutDate,
-                search.guests,
+                search.getGuests(),
                 -1,
                 -1,
                 -1,

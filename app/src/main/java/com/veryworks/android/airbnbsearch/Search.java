@@ -13,15 +13,13 @@ public class Search {
 
     public String checkinDate = null;
     public String checkoutDate = null;
-    public int guests = 1;
-    public void setGuestsMinus(){
-        if(guests > 1)
-            guests--;
+    private int guests = 1;
+    public void setGuests(int count){
+        if(count > 1) guests = count;
     }
-    public void setGuestsPlus(){
-        guests++;
+    public int getGuests(){
+        return guests;
     }
-
     public int type;
     public int price_min;
     public int price_max;
